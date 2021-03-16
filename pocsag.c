@@ -290,7 +290,36 @@ static unsigned int pocsag_syndrome(uint32_t data)
 
 bool pocsag_init_charset(char *charset)
 {
-	if(strcmp(charset,"DE")==0) // German charset
+	if(strcmp(charset,"CH")==0) // Swiss charset
+	{
+		#ifdef CHARSET_UTF8
+			trtab[0x23] = "ù";
+			trtab[0x40] = "à";
+			trtab[0x5b] = "é";
+			trtab[0x5c] = "ç";
+			trtab[0x5d] = "ê";
+			trtab[0x5e] = ".";
+			trtab[0x5f] = "è";
+			trtab[0x60] = "";
+			trtab[0x7b] = "ä";
+			trtab[0x7c] = "ö";
+			trtab[0x7d] = "ü";
+			trtab[0x7e] = "û";
+		#elif defined CHARSET_LATIN1
+			trtab[0x23] = "\249";
+			trtab[0x40] = "\224";
+			trtab[0x5b] = "\233";
+			trtab[0x5c] = "\231";
+			trtab[0x5d] = "\234";
+			trtab[0x5e] = "\46";
+			trtab[0x5f] = "\232";
+			trtab[0x60] = "";
+			trtab[0x7b] = "\344";
+			trtab[0x7c] = "\366";
+			trtab[0x7d] = "\374";
+			trtab[0x7e] = "\337";
+	}
+	else if(strcmp(charset,"DE")==0) // German charset
 	{
 		#ifdef CHARSET_UTF8
 			trtab[0x5b] = "Ä";
